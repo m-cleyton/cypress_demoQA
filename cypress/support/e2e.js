@@ -17,10 +17,8 @@
 import "./commands";
 
 //cypress / support / e2e.js;
-// Tratamento para erros de cross-origin scripts (anúncios, etc.)
+// Tratamento de erros
 Cypress.on("uncaught:exception", (err, runnable) => {
-  // returning false here prevents Cypress from failing the test
-  // especialmente útil para erros de anúncios de terceiros
   if (
     err.message.includes("Script error") ||
     err.message.includes("ResizeObserver") ||
@@ -35,6 +33,6 @@ Cypress.on("uncaught:exception", (err, runnable) => {
   ) {
     return false;
   }
-  // allow other errors to fail the test
+
   return true;
 });

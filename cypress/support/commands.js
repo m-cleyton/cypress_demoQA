@@ -26,7 +26,7 @@
 
 // cypress/support/commands.js
 
-// Comando customizado para preencher o formulário completo
+// Preencher o formulário completo
 Cypress.Commands.add("fillAutomationForm", (userData) => {
   // Preencher nome e sobrenome
   cy.get('[placeholder="First Name"]').clear().type(userData.firstName);
@@ -54,7 +54,7 @@ Cypress.Commands.add("fillAutomationForm", (userData) => {
   // Selecionar hobby
   cy.get(`label[for="${userData.hobby}-checkbox"]`).click();
 
-  // Upload de arquivo (se fornecido)
+  // Upload de arquivo
   if (userData.fileName) {
     cy.get("#uploadPicture").selectFile(
       `cypress/fixtures/${userData.fileName}`
@@ -75,12 +75,12 @@ Cypress.Commands.add("fillAutomationForm", (userData) => {
   cy.get("#react-select-4-input").type("{downarrow}{enter}");
 });
 
-// Comando para fechar o modal de sucesso
+// Fechar o modal de sucesso
 Cypress.Commands.add("closeSuccessModal", () => {
   cy.get("#closeLargeModal").should("be.visible").click();
 });
 
-// Comando para verificar dados no modal de confirmação
+//Verificar dados no modal de confirmação
 Cypress.Commands.add("verifySubmissionModal", (userData) => {
   cy.get(".modal-content").should("be.visible");
   cy.get(".modal-header .modal-title").should(
@@ -99,8 +99,8 @@ Cypress.Commands.add("verifySubmissionModal", (userData) => {
 });
 
 // Comando para remover ads que podem interferir nos testes
+//Não esquecer que tenho que validar melhor, site com muitas requisições de popups
 Cypress.Commands.add("removeAds", () => {
-  // Tentar remover diferentes tipos de ads sem falhar se não existirem
   const adsSelectors = [
     "#adplus-anchor",
     '[id*="google_ads"]',
@@ -119,7 +119,7 @@ Cypress.Commands.add("removeAds", () => {
   });
 
   cy.get("body").then(($body) => {
-    // Tenta encontrar e fechar anúncios se existirem
+    // Procurar anuncios e fecha-los caso existam
     if ($body.find('iframe[src*="ads-iframe"]').length) {
       cy.get('iframe[src*="ads-iframe"]')
         .its("0.contentDocument.body")
@@ -133,11 +133,11 @@ Cypress.Commands.add("removeAds", () => {
     }
   });
 
-  // Aguardar um pouco após tentar remover ads
+  // Aguardar um pouco após tentar remover os anuncios do demoqa
   cy.wait(300);
 });
 
-// Comando para validar campos obrigatórios
+// Validar campos obrigatórios
 Cypress.Commands.add("validateRequiredFields", () => {
   cy.get("#firstName").should("have.class", "field-error");
   cy.get("#lastName").should("have.class", "field-error");
@@ -145,7 +145,7 @@ Cypress.Commands.add("validateRequiredFields", () => {
   cy.get("#userNumber").should("have.class", "field-error");
 });
 
-// Comando para preencher apenas campos obrigatórios
+// Preencher apenas campos obrigatórios
 Cypress.Commands.add("fillRequiredFields", (userData) => {
   cy.get("#firstName").type(userData.firstName);
   cy.get("#lastName").type(userData.lastName);
@@ -154,7 +154,7 @@ Cypress.Commands.add("fillRequiredFields", (userData) => {
   cy.get("#userNumber").type(userData.mobile);
 });
 
-// Comando para verificar dados específicos no modal
+//Verificar dados específicos no modal
 Cypress.Commands.add("verifyModalData", (expectedData) => {
   cy.get(".table-responsive").within(() => {
     if (expectedData.studentName) {

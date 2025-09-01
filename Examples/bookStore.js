@@ -1,5 +1,6 @@
 // /// <reference types="cypress" />
 
+//***********EXEMPLO DE CONSUMO API SEM O USO DE BDD
 // describe("DemoQA Bookstore API Flow", () => {
 //   it("Full flow: create user, generate token, rent books, log details", () => {
 //     const timestamp = Date.now();
@@ -7,7 +8,7 @@
 //     const password = "Password123!";
 //     let userId, token, selectedIsbns;
 
-//     // 1️⃣ Criar usuário
+//     // Criar usuário
 //     cy.request({
 //       method: "POST",
 //       url: "/Account/v1/User",
@@ -19,7 +20,7 @@
 //       cy.task("logToFile", { action: "createUser", response: res.body });
 //     });
 
-//     // 2️⃣ Gerar token
+//     // Geração do token
 //     cy.request({
 //       method: "POST",
 //       url: "/Account/v1/GenerateToken",
@@ -31,7 +32,7 @@
 //       cy.task("logToFile", { action: "generateToken", response: res.body });
 //     });
 
-//     // 3️⃣ Confirmar autorização
+//     //Confirmar autorização
 //     cy.request({
 //       method: "POST",
 //       url: "/Account/v1/Authorized",
@@ -42,7 +43,7 @@
 //       cy.task("logToFile", { action: "isAuthorized", response: res.body });
 //     });
 
-//     // 4️⃣ Listar todos os livros
+//     //Listar todos os livros
 //     cy.request({
 //       method: "GET",
 //       url: "/BookStore/v1/Books",
@@ -53,7 +54,7 @@
 //       cy.task("logToFile", { action: "getAllBooks", response: res.body });
 //     });
 
-//     // 5️⃣ Alugar livros
+//     // Alugar livros
 //     cy.then(() => {
 //       if (!selectedIsbns || !selectedIsbns.length) {
 //         throw new Error("No books available to rent");
@@ -73,7 +74,7 @@
 //       });
 //     });
 
-//     // 6️⃣ Obter detalhes do usuário
+//     // Obter detalhes do usuário
 //     cy.then(() => {
 //       cy.request({
 //         method: "GET",
